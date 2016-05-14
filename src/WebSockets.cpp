@@ -68,6 +68,21 @@ void WebSockets::clientDisconnect(WSclient_t * client, uint16_t code, char * rea
     clientDisconnect(client);
 }
 
+inline uint32_t freeHeap()
+{
+#if defined(PARTICLE)
+	return System.freeMemory();
+#else
+	ESP.getFreeHeap();
+#endif
+}
+
+#if defined(PARTICLE)
+inline uint8_t bit(uint8_t bit) {
+	return 1<<bit;
+}
+#endif
+
 /**
  *
  * @param client WSclient_t *   ptr to the client struct
@@ -123,7 +138,7 @@ bool WebSockets::sendFrame(WSclient_t * client, WSopcode_t opcode, uint8_t * pay
 #ifdef WEBSOCKETS_USE_BIG_MEM
     // only for ESP since AVR has less HEAP
     // try to send data in one TCP package (only if some free Heap is there)
-    if(!headerToPayload && ((length > 0) && (length < 1400)) && (ESP.getFreeHeap() > 6000)) {
+    if(!headerToPayload && ((length > 0) && (length < 1400)) && (freeHeap() > 6000)) {
         DEBUG_WEBSOCKETS("[WS][%d][sendFrame] pack to one TCP package...\n", client->num);
         uint8_t * dataPtr = (uint8_t *) malloc(length + WEBSOCKETS_MAX_HEADER_SIZE);
         if(dataPtr) {
@@ -448,6 +463,7 @@ void WebSockets::handleWebsocketPayloadCb(WSclient_t * client, bool ok, uint8_t 
                     DEBUG_WEBSOCKETS("\n");
                 }
                 clientDisconnect(client, 1000);
+                (void)reasonCode;	// prevent unused symbol warnings
             }
                 break;
             case WSop_continuation:

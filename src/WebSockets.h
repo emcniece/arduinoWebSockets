@@ -34,7 +34,7 @@
 #define NODEBUG_WEBSOCKETS
 #endif
 
-#ifdef ESP8266
+#if defined(ESP8266) || defined(PARTICLE)
 #define WEBSOCKETS_MAX_DATA_SIZE  (15*1024)
 #define WEBSOCKETS_USE_BIG_MEM
 #else
@@ -48,6 +48,7 @@
 #define NETWORK_ESP8266         (1)
 #define NETWORK_W5100           (2)
 #define NETWORK_ENC28J60        (3)
+#define NETWORK_PARTICLE			(4)
 
 // max size of the WS Message Header
 #define WEBSOCKETS_MAX_HEADER_SIZE  (14)
@@ -56,6 +57,8 @@
 #if defined(ESP8266) || defined(ESP31B)
 #define WEBSOCKETS_NETWORK_TYPE NETWORK_ESP8266
 //#define WEBSOCKETS_NETWORK_TYPE NETWORK_ESP8266_ASYNC
+#elif defined(PARTICLE)
+#define WEBSOCKETS_NETWORK_TYPE NETWORK_PARTICLE
 #else
 #define WEBSOCKETS_NETWORK_TYPE NETWORK_W5100
 #endif
@@ -107,6 +110,10 @@
 #define WEBSOCKETS_NETWORK_CLASS UIPClient
 #define WEBSOCKETS_NETWORK_SERVER_CLASS UIPServer
 
+#elif (WEBSOCKETS_NETWORK_TYPE == NETWORK_PARTICLE)
+#include "application.h"
+#define WEBSOCKETS_NETWORK_CLASS TCPClient
+#define WEBSOCKETS_NETWORK_SERVER_CLASS TCPServer
 #else
 #error "no network type selected!"
 #endif
