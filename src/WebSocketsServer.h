@@ -25,7 +25,11 @@
 #ifndef WEBSOCKETSSERVER_H_
 #define WEBSOCKETSSERVER_H_
 
+#if defined(PARTICLE)
+#include "Particle.h"
+#else
 #include <Arduino.h>
+#endif
 #include "WebSockets.h"
 
 #define WEBSOCKETS_SERVER_CLIENT_MAX  (5)

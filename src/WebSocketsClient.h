@@ -25,7 +25,12 @@
 #ifndef WEBSOCKETSCLIENT_H_
 #define WEBSOCKETSCLIENT_H_
 
+#if defined(PARTICLE)
+#include "Particle.h"
+#else
 #include <Arduino.h>
+#endif
+
 #include "WebSockets.h"
 
 class WebSocketsClient: private WebSockets {

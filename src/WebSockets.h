@@ -25,7 +25,11 @@
 #ifndef WEBSOCKETS_H_
 #define WEBSOCKETS_H_
 
+#if defined(PARTICLE)
+#include "Particle.h"
+#else
 #include <Arduino.h>
+#endif
 
 //#define DEBUG_WEBSOCKETS(...) os_printf( __VA_ARGS__ )
 
