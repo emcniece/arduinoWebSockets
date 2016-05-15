@@ -49,6 +49,9 @@ WebSocketsServer::~WebSocketsServer() {
 
 #if (WEBSOCKETS_NETWORK_TYPE == NETWORK_ESP8266)
     _server->close();
+#elif (WEBSOCKETS_NETWORK_TYPE == NETWORK_PARTICLE)
+    _server->stop();
+    delete _server;
 #else
     // TODO how to close server?
 #endif
@@ -304,7 +307,7 @@ void WebSocketsServer::setAuthorization(const char * auth) {
     }
 }
 
-#if (WEBSOCKETS_NETWORK_TYPE == NETWORK_ESP8266) || (WEBSOCKETS_NETWORK_TYPE == NETWORK_ESP8266_ASYNC)
+#if (WEBSOCKETS_NETWORK_TYPE == NETWORK_ESP8266) || (WEBSOCKETS_NETWORK_TYPE == NETWORK_ESP8266_ASYNC) || (WEBSOCKETS_NETWORK_TYPE == NETWORK_PARTICLE)
 /**
  * get an IP for a client
  * @param num uint8_t client id
