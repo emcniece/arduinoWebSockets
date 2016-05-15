@@ -508,7 +508,13 @@ void WebSocketsServer::handleNewClients(void) {
         // store new connection
         WEBSOCKETS_NETWORK_CLASS * tcpClient = new WEBSOCKETS_NETWORK_CLASS(_server->available());
 #else
-        WEBSOCKETS_NETWORK_CLASS * tcpClient = new WEBSOCKETS_NETWORK_CLASS(_server->available());
+        WEBSOCKETS_NETWORK_CLASS available = _server->available();
+        WEBSOCKETS_NETWORK_CLASS * tcpClient = nullptr;
+        if (available) {
+        		tcpClient = new WEBSOCKETS_NETWORK_CLASS(available);
+        }
+        else
+        		return;
 #endif
 
         if(!tcpClient) {
@@ -520,7 +526,7 @@ void WebSocketsServer::handleNewClients(void) {
 
         if(!ok) {
             // no free space to handle client
-#if (WEBSOCKETS_NETWORK_TYPE == NETWORK_ESP8266)
+#if (WEBSOCKETS_NETWORK_TYPE == NETWORK_ESP8266 || WEBSOCKETS_NETWORK_TYPE == NETWORK_PARTICLE)
             IPAddress ip = tcpClient->remoteIP();
             DEBUG_WEBSOCKETS("[WS-Server] no free space new client from %d.%d.%d.%d\n", ip[0], ip[1], ip[2], ip[3]);
 #else
