@@ -210,10 +210,10 @@ class WebSockets {
         typedef std::function<void(WSclient_t * client, bool ok)> WSreadWaitCb;
 #endif
 
-        virtual void clientDisconnect(WSclient_t * client);
-        virtual bool clientIsConnected(WSclient_t * client);
+        virtual void clientDisconnect(WSclient_t * client)=0;
+        virtual bool clientIsConnected(WSclient_t * client)=0;
 
-        virtual void messageRecived(WSclient_t * client, WSopcode_t opcode, uint8_t * payload, size_t length);
+        virtual void messageRecived(WSclient_t * client, WSopcode_t opcode, uint8_t * payload, size_t length)=0;
 
         void clientDisconnect(WSclient_t * client, uint16_t code, char * reason = NULL, size_t reasonLen = 0);
         bool sendFrame(WSclient_t * client, WSopcode_t opcode, uint8_t * payload = NULL, size_t length = 0, bool mask = false, bool fin = true, bool headerToPayload = false);
