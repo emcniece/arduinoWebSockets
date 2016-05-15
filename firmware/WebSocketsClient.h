@@ -31,7 +31,7 @@
 #include <Arduino.h>
 #endif
 
-#include "WebSockets.h"
+#include "WebSocketsBase.h"
 
 class WebSocketsClient: private WebSockets {
     public:

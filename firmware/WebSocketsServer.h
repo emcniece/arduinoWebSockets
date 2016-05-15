@@ -30,7 +30,7 @@
 #else
 #include <Arduino.h>
 #endif
-#include "WebSockets.h"
+#include "WebSocketsBase.h"
 
 #define WEBSOCKETS_SERVER_CLIENT_MAX  (5)
 
