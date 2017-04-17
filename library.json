@@ -1,5 +1,5 @@
 {
-  "name": "WebSockets",
+  "name": "Particle-WebSockets",
   "keywords": "wifi, http, web, server, client, websocket",
   "description": "WebSocket Server and Client for Arduino based on RFC6455",
   "repository":
@@ -12,8 +12,8 @@
   "platforms": "*",
   "authors":
   {
-    "name": "Markus Sattler",
-    "url": "https://github.com/Links2004",
+    "name": "Eric McNiece",
+    "url": "https://github.com/emcniece",
     "maintainer": true
   }
 }
