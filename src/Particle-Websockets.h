@@ -1,3 +1,5 @@
 #pragma once
 
-#include "Particle-WebSockets/Particle-WebSockets.h"
+#include "WebSocketsClient.h"
+#include "WebSocketsServer.h"
+#include "WebSocketsBase.h"
