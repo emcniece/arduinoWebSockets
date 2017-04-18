@@ -22,7 +22,7 @@
  *
  */
 
-#include "WebSockets.h"
+#include "Particle-WebSockets.h"
 #include "WebSocketsServer.h"
 
 WebSocketsServer::WebSocketsServer(uint16_t port, String origin, String protocol) {

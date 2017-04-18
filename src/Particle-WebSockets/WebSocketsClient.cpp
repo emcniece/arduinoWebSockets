@@ -22,7 +22,7 @@
  *
  */
 
-#include "WebSockets.h"
+#include "Particle-WebSockets.h"
 #include "WebSocketsClient.h"
 
 

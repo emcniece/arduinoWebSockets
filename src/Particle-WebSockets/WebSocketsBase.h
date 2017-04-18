@@ -22,7 +22,7 @@
  *
  */
 
-#include "WebSockets.h"
+#include "Particle-WebSockets.h"
 
 #ifdef ESP8266
 #include <core_esp8266_features.h>
